@@ -1,7 +1,14 @@
+sudo: false
+dist: trusty
 language: python
 python:
   - "3.6"
-script: python -m unittest
+install:
+  - "pip install --upgrade pip"
+  - "pip install pipenv"
+  - "pipenv install"
+script:
+  - "pipenv run time python -m unittest"
 branches:
   only:
     - master
