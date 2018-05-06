@@ -4,14 +4,11 @@ from dynamo_json import marshall, unmarshall
 
 
 class TestDynamoJson(unittest.TestCase):
-    def test_marshalls_string(self):
-        self.assertEqual(marshall("foo"), {"S": "foo"})
-
     def test_marshalls_json(self):
-        self.assertEqual(marshall({"foo": "bar"}), {"M": {"foo": {"S": "bar"}}})
+        self.assertEqual(marshall({"foo": "bar"}), {"foo": {"S": "bar"}})
 
     def test_unmarshalls_json(self):
-        self.assertEqual(unmarshall({"M": {"foo": {"S": "bar"}}}), {"foo": "bar"})
+        self.assertEqual(unmarshall({"foo": {"S": "bar"}}), {"foo": "bar"})
 
     def test_marshall_unmarshall_identity(self):
         data = {

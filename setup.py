@@ -27,6 +27,11 @@ setup(
     ],
     keywords='dynamo json dynamodb',  # Optional
     py_modules=["dynamo_json"],
+    entry_points={
+        'console_scripts': [
+            'dynamo-json=cli:dynamo_json'
+        ]
+    },
     project_urls={  # Optional
         'Bug Reports': 'https://github.com/adilosa/dynamo-json/issues',
         'Say Thanks!': 'http://saythanks.io/to/adilosa',
