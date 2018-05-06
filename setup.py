@@ -26,7 +26,7 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords='dynamo json dynamodb',  # Optional
-    py_modules=["dynamo_json"],
+    py_modules=["dynamo_json", "cli"],
     entry_points={
         'console_scripts': [
             'dynamo-json=cli:dynamo_json'
