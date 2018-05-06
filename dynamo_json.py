@@ -1,7 +1,7 @@
 import json
 
 
-def marshall(value):
+def _marshall(value):
     if isinstance(value, str):
         return {"S": value}
     elif isinstance(value, bool):
@@ -11,12 +11,18 @@ def marshall(value):
     elif value is None:
         return {"NULL": True}
     elif isinstance(value, list):
-        return {"L": [marshall(v) for v in value]}
+        return {"L": [_marshall(v) for v in value]}
     elif isinstance(value, dict):
-        return {"M": {k1: marshall(v1) for k1, v1 in value.items()}}
+        return {"M": {k1: _marshall(v1) for k1, v1 in value.items()}}
+    else:
+        raise Exception("Don't know how to marshall type: " + str(type(value)))
 
 
-def unmarshall(value):
+def marshall(value):
+    return {k: _marshall(v) for k, v in value.items()}
+
+
+def _unmarshall(value):
     if "S" in value:
         return str(value["S"])
     elif "BOOL" in value:
@@ -26,7 +32,13 @@ def unmarshall(value):
     elif "NULL" in value:
         return None
     elif "L" in value:
-        return [unmarshall(v) for v in value["L"]]
+        return [_unmarshall(v) for v in value["L"]]
     elif "M" in value:
-        return {k: unmarshall(v) for k, v in value["M"].items()}
+        return {k: _unmarshall(v) for k, v in value["M"].items()}
+    else:
+        raise Exception("No known data type descriptor found. Maybe this is already JSON?", value)
+
+
+def unmarshall(value):
+    return {k: _unmarshall(v) for k, v in value.items()}
 
