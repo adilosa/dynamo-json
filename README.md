@@ -1,3 +1,5 @@
+[![Build](https://travis-ci.org/adilosa/dynamo-json.svg?branch=master)]()
+
 # dynamo-json
 
 Sick of DynamoDB using its own data type descriptors? Swap between DynamoDB and normal JSON!
