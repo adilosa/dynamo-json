@@ -28,7 +28,7 @@ def _unmarshall(value):
     elif "BOOL" in value:
         return value["BOOL"]
     elif "N" in value:
-        return float(value["N"]) if "." in value["N"] else int(value["N"])
+        return float(value["N"]) if ("." in value["N"] or "e" in value["N"]) else int(value["N"])
     elif "NULL" in value:
         return None
     elif "L" in value:
